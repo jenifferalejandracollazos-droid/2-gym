@@ -16,15 +16,15 @@ A full-stack web application for gym management, built with a client-server arch
 - **Client dashboard** — view personal profile, active subscription, and assigned training routines
 - **Trainer dashboard** — manage assigned clients and their progress
 - **RESTful API** designed to centralize and organize gym data in a structured, secure way
-- **Responsive frontend** built with React and Bootstrap
-
----
+- **Responsive frontend** built with React 
+- **Image management** via Cloudinary for optimized media storage and delivery
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React.js, Bootstrap, JavaScript (ES6+) |
+| | Frontend | React.js, Custom CSS3, JavaScript (ES6+) |
+| Media Storage | Cloudinary |
 | Backend | Python, Flask |
 | Database | SQLAlchemy, PostgreSQL |
 | Auth | JSON Web Token (JWT) |
