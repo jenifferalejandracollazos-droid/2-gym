@@ -98,7 +98,6 @@ This project was built as a final project at [4Geeks Academy](https://4geeksacad
 
 - [Jeniffer Collazos](https://github.com/jenifferalejandracollazos-droid)
 - Juan Castro
-- Ricardo Ali
 
 ---
 
