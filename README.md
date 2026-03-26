@@ -1,81 +1,129 @@
-# WebApp boilerplate with React JS and Flask API
+# 2-Gym 🏋️ — Gym Management Web App
 
-Build web applications using React.js for the front end and python/flask for your backend API.
+A full-stack web application for gym management, built with a client-server architecture. It centralizes client and trainer information, controls access by role, and provides personalized dashboards for each type of user.
 
-- Documentation can be found here: https://4geeks.com/docs/start/react-flask-template
-- Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
-- Integrated with Pipenv for package managing.
-- Fast deployment to Render [in just a few steps here](https://4geeks.com/docs/start/deploy-to-render-com).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
+---
 
-### 1) Installation:
+## 🚀 Live Demo
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+> Coming soon — deployment in progress.
 
-It is recomended to install the backend first, make sure you have Python 3.10, Pipenv and a database engine (Posgress recomended)
+---
 
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
+## ✨ Features
 
-| Engine    | DATABASE_URL                                        |
-| --------- | --------------------------------------------------- |
-| SQLite    | sqlite:////test.db                                  |
-| MySQL     | mysql://username:password@localhost:port/example    |
-| Postgress | postgres://username:password@localhost:5432/example |
+- **Authentication & role-based access control** using JSON Web Tokens (JWT)
+- **Client dashboard** — view personal profile, active subscription, and assigned training routines
+- **Trainer dashboard** — manage assigned clients and their progress
+- **RESTful API** designed to centralize and organize gym data in a structured, secure way
+- **Responsive frontend** built with React and Bootstrap
 
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start`
+---
 
-> Note: Codespaces users can connect to psql by typing: `psql -h localhost -U gitpod example`
+## 🛠️ Tech Stack
 
-### Undo a migration
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js, Bootstrap, JavaScript (ES6+) |
+| Backend | Python, Flask |
+| Database | SQLAlchemy, PostgreSQL |
+| Auth | JSON Web Token (JWT) |
+| Project Management | Trello |
+| Version Control | Git, GitHub |
 
-You are also able to undo a migration by running
+---
 
-```sh
-$ pipenv run downgrade
+## 📐 Architecture
+
+The application follows a **client-server architecture**:
+
+- The **frontend** (React) communicates with the backend through a REST API
+- The **backend** (Python/Flask) handles business logic, authentication, and database operations
+- **JWT tokens** are used to protect private routes and differentiate user roles
+
+---
+
+## 🖥️ How to Run Locally
+
+### Prerequisites
+- Node.js and npm installed
+- Python 3.8+ installed
+- PostgreSQL installed and running
+
+### Backend
+
+```bash
+# Clone the repository
+git clone https://github.com/jenifferalejandracollazos-droid/2-gym.git
+cd 2-gym
+
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Run migrations
+flask db upgrade
+
+# Start the backend server
+flask run
 ```
 
-### Backend Populate Table Users
+### Frontend
 
-To insert test users in the database execute the following command:
+```bash
+# In a new terminal, navigate to the frontend folder
+cd src/front
 
-```sh
-$ flask insert-test-users 5
+# Install dependencies
+npm install
+
+# Start the frontend
+npm start
 ```
 
-And you will see the following message:
+The app will be running at `http://localhost:3000`
 
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
+---
 
-### **Important note for the database and the data inside it**
+## 👥 Team
 
-Every Github codespace environment will have **its own database**, so if you're working with more people eveyone will have a different database and different records inside it. This data **will be lost**, so don't spend too much time manually creating records for testing, instead, you can automate adding records to your database by editing ```commands.py``` file inside ```/src/api``` folder. Edit line 32 function ```insert_test_data``` to insert the data according to your model (use the function ```insert_test_users``` above as an example). Then, all you need to do is run ```pipenv run insert-test-data```.
+This project was built as a final project at [4Geeks Academy](https://4geeksacademy.com/) by:
 
-### Front-End Manual Installation:
+- [Jeniffer Collazos](https://github.com/jenifferalejandracollazos-droid)
+- Juan Castro
+- Ricardo Ali
 
--   Make sure you are using node version 20 and that you have already successfully installed and runned the backend.
+---
 
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
+## 🧠 What I Learned
 
-## Publish your website!
+- Designing and consuming a RESTful API from scratch
+- Implementing JWT authentication with role-based access control
+- Managing frontend state in React to display dynamic, role-specific dashboards
+- Coordinating a multi-person development workflow using Trello and Git
 
-This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter of minutes. Please read the [official documentation about it](https://4geeks.com/docs/start/deploy-to-render-com).
+---
 
-### Contributors
+## 🔮 Future Improvements
 
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
+- [ ] Deploy to Render (frontend + backend)
+- [ ] Add payment integration for subscription management
+- [ ] Implement progress tracking with charts for clients
+- [ ] Add email notifications for subscription renewals
+- [ ] Mobile-responsive improvements
 
-You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
+---
+
+## 📬 Contact
+
+**Jeniffer Collazos** — Frontend Developer  
+📧 jecollazosdev@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/jeniffer-alejandra-collazos-córdoba1/)  
+💻 [GitHub](https://github.com/jenifferalejandracollazos-droid)
