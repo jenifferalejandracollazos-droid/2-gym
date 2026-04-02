@@ -11,7 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
 
   const handlerLogin = async () => {
-    if (email.length < 7 || password.length < 8) {
+    if (!email || !password) {
       alert("Email o password inválidos");
       return;
     }
@@ -19,8 +19,9 @@ const Login = () => {
     try {
       setLoading(true);
 
+            const BACKEND = import.meta.env.VITE_BACKEND_URL;
             const response = await fetch(
-                "https://legendary-spoon-xjv5ppjxwv5hpgwq-3001.app.github.dev/api/login",
+                `${BACKEND}/api/login`,
                 {
                     method: "POST",
                     body: JSON.stringify({

@@ -6,11 +6,9 @@ import os
 from flask import Flask, jsonify, send_from_directory
 from flask_migrate import Migrate
 from flask_cors import CORS
-from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager
-
 from api.utils import APIException, generate_sitemap
 from api.models import db
+from api.extensions import bcrypt, jwt
 from api.routes import api, bp
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -25,13 +23,13 @@ app.url_map.strict_slashes = False
 # ---------------------------------------------------
 # CORS (ESTO ARREGLA TU ERROR)
 # ---------------------------------------------------
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
 
 # ---------------------------------------------------
 # EXTENSIONS
 # ---------------------------------------------------
-bcrypt = Bcrypt(app)
-jwt = JWTManager(app)
+bcrypt.init_app(app)
+jwt.init_app(app)
 
 # ---------------------------------------------------
 # ENV
@@ -56,6 +54,7 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////tmp/test.db"
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["JWT_SECRET_KEY"] = os.environ.get("FLASK_APP_KEY", "change-me-in-production")
 
 Migrate(app, db, compare_type=True)
 db.init_app(app)
@@ -92,6 +91,8 @@ def sitemap():
 
 @app.route("/<path:path>", methods=["GET"])
 def serve_any_other_file(path):
+    if path.startswith("api/"):
+        return jsonify({"msg": "Not found"}), 404
     if not os.path.isfile(os.path.join(static_file_dir, path)):
         path = "index.html"
     response = send_from_directory(static_file_dir, path)

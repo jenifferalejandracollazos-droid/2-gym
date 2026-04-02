@@ -4,6 +4,7 @@ import Logout from "../components/Logout";
 import { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import "./Dashboard.css";
+import Spinner from "../components/Spinner.jsx";
 
 
 const Dashboard = () => {
@@ -123,7 +124,9 @@ const Dashboard = () => {
                     <h3 className="section-title">Mis Ejercicios Asignados</h3>
 
                     {loading ? (
-                        <p className="dashboard-loading">Cargando ejercicios...</p>
+                        <div className="dashboard-spinner">
+                            <Spinner />
+                        </div>
                     ) : exercises.length === 0 ? (
                         <p className="dashboard-empty">
                             No tienes ejercicios asignados aún.

@@ -3,41 +3,64 @@ import { useNavigate } from "react-router-dom";
 import "./Registro.css";
 
 const Registro = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("client");
-    const [loading, setLoading] = useState(false);
-    
-    let navigate = useNavigate()
-    const handlerRegistro = async () => {
-        if (name.length < 2 || email.length < 7 || password.length < 8) {
-            alert("Algún dato quedó corto");
-            return;
-        }
-        const payload = {
-            name,
-            email,
-            password,
-            role 
-        };
-        try {
-            setLoading(true);
-            const response = await fetch(
-                "https://legendary-spoon-xjv5ppjxwv5hpgwq-3001.app.github.dev/api/create_user",
-                {
-                    method: "POST",
-                    body: JSON.stringify(payload),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-            const text = await response.text();
-            let data;
-            try { data = JSON.parse(text); } catch { data = { message: text }; }
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("client");
+  const [loading, setLoading] = useState(false);
 
-            console.log('Registro response status:', response.status, 'body:', data);
+  let navigate = useNavigate()
+  const handlerRegistro = async () => {
+    // Validaciones mejoradas con mensajes específicos
+    if (!name.trim()) {
+      alert("El nombre es obligatorio");
+      return;
+    }
+    if (name.trim().length < 2) {
+      alert("El nombre debe tener al menos 2 caracteres");
+      return;
+    }
+    if (!email.trim()) {
+      alert("El email es obligatorio");
+      return;
+    }
+    if (email.trim().length < 5 || !email.includes("@")) {
+      alert("El email debe ser válido");
+      return;
+    }
+    if (!password) {
+      alert("La contraseña es obligatoria");
+      return;
+    }
+    if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres");
+      return;
+    }
+
+    const payload = {
+      name: name.trim(),
+      email: email.trim(),
+      password,
+      role
+    };
+    try {
+      setLoading(true);
+      const BACKEND = import.meta.env.VITE_BACKEND_URL;
+      const response = await fetch(
+        `${BACKEND}/api/create_user`,
+        {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      const text = await response.text();
+      let data;
+      try { data = JSON.parse(text); } catch { data = { message: text }; }
+
+      console.log('Registro response status:', response.status, 'body:', data);
 
       if (response.ok) {
         alert("Usuario creado con éxito");

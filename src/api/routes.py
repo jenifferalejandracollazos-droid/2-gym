@@ -2,22 +2,15 @@ import os
 import requests
 from flask import request, jsonify, Blueprint
 from api.models import db, User, EjercicioAsignado
-from flask_cors import CORS
-from flask_bcrypt import Bcrypt
+from api.extensions import bcrypt
 from datetime import timedelta
 from flask_jwt_extended import (
-    JWTManager,
     create_access_token,
     jwt_required,
     get_jwt_identity
 )
 
 api = Blueprint("api", __name__)
-CORS(api)
-
-bcrypt = Bcrypt()
-jwt = JWTManager()
-
 bp = Blueprint('proxy', __name__)
 API_KEY = os.environ.get("API_KEY_EXERCISES")
 
@@ -83,6 +76,11 @@ def create_user():
 # -----------------------
 # AUTH
 # -----------------------
+
+
+@api.route("/hello", methods=["GET"])
+def hello():
+    return jsonify({"msg": "Hello, World!"}), 200
 
 
 @api.route("/login", methods=["POST"])

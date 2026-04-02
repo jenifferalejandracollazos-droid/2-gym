@@ -37,7 +37,7 @@ export const Navbar = () => {
       setUserRole(null);
       dispatch({ type: "current_user", payload: {} });
     }
-  }, [store.current_user, BACKEND, dispatch]);
+  }, [store.current_user?.role, BACKEND]);
 
   return (
     <nav className="navbar navbar-expand-lg custom-navbar">
