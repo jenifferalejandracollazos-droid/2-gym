@@ -9,12 +9,25 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const { store, dispatch } = useGlobalReducer()
     const navigate = useNavigate();
+    const [errors, setErrors] = useState ({});
 
   const handlerLogin = async () => {
-    if (!email || !password) {
-      alert("Email o password inválidos");
+    const newErrors = {};
+    if (!email.trim()) {
+      newErrors.email = "El email es obligatorio";
+    } else if (!email.includes("@")) {
+      newErrors.email = "El email debe ser válido";
+    }
+
+    if (!password) {
+      newErrors.password = "La contraseña es obligatoria";
+    } 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
+
+    setErrors({});
 
     try {
       setLoading(true);
@@ -39,7 +52,6 @@ const Login = () => {
             if (response.ok) {
                 localStorage.setItem("access_token", data.access_token);
                 dispatch({ type: "current_user", payload: data })
-                window.alert("Bienvenido");
                 
                 const role = data?.user?.role || data?.role || data?.current_user?.role || null;
                 const roleRouteMap = {
@@ -50,11 +62,12 @@ const Login = () => {
                 const destination = role ? (roleRouteMap[role] || "/dashboard") : "/dashboard";
                 navigate(destination);
             } else {
-                alert("Credenciales incorrectas");
+                setErrors({ general: "Credenciales incorrectas. Verifica tu email y contraseña."});
             }
+
         } catch (error) {
-            console.error(error);
-        } finally {
+          setErrors({ general: "Error de red. Intenta de nuevo." })
+;        } finally {
             setLoading(false);
         }
     };
@@ -70,6 +83,7 @@ const Login = () => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
+          {errors.email && <p className="error-msg">{errors.email}</p>}
         </div>
 
         <div className="login-group">
@@ -78,7 +92,10 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          {errors.password && <p className="error-msg">{errors.password}</p>}
         </div>
+
+        {errors.general && <p className="error-msg">{errors.general}</p>}
 
         <button
           className="btn-neon"
