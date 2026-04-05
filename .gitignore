@@ -17,6 +17,7 @@ php_errorlog
 !render.yml
 !.render-buildpacks.json
 !.renderignore
+!.python-version
 
 # track webpack configs (i.e. do NOT ignore it)
 !composer.json
