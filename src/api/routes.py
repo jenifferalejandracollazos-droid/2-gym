@@ -54,7 +54,7 @@ def create_user():
 
     user = User.query.filter_by(email=email).first()
     if user:
-        return jsonify({"msg": "Usuario ya existe"}), 404
+        return jsonify({"msg": "Usuario ya existe"}), 409
 
     new_user = User(
         name=data.get("name"),
