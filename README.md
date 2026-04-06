@@ -1,45 +1,35 @@
-# 2-Gym 🏋️ — Gym Management Web App
+# 🏋️ 2-Gym — Gym Management Web App
 
-A full-stack web application for gym management, built with a client-server architecture. It centralizes client and trainer information, controls access by role, and provides personalized dashboards for each type of user.
+A fullstack web application for gym management built with **React** and **Flask**. It centralizes client and trainer information, controls access by role, and provides personalized dashboards for each type of user.
 
 ---
 
 ## 🚀 Live Demo
 
-> Coming soon — deployment in progress.
+| Service | URL |
+|---------|-----|
+| 🌐 Frontend | [two-gym-frontend.onrender.com](https://two-gym-frontend.onrender.com) |
+| ⚙️ Backend | [two-gym-backend.onrender.com](https://two-gym-backend.onrender.com) |
 
 ---
 
-## ✨ Features
+## ✨ Main Features
 
-- **Authentication & role-based access control** using JSON Web Tokens (JWT)
-- **Client dashboard** — view personal profile, active subscription, and assigned training routines
-- **Trainer dashboard** — manage assigned clients and their progress
-- **RESTful API** designed to centralize and organize gym data in a structured, secure way
-- **Responsive frontend** built with React 
-- **Image management** via Cloudinary for optimized media storage and delivery
+- 🔐 **User registration and login** with JWT authentication
+- 👥 **Role-based access** — separate dashboards for admin and client
+- 💪 **Exercise assignment** — admins assign routines to clients
+- 👤 **User profile** — clients view their personal info and assigned exercises
+
+---
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
-| | Frontend | React.js, Custom CSS3, JavaScript (ES6+) |
-| Media Storage | Cloudinary |
-| Backend | Python, Flask |
-| Database | SQLAlchemy, PostgreSQL |
-| Auth | JSON Web Token (JWT) |
-| Project Management | Trello |
-| Version Control | Git, GitHub |
-
----
-
-## 📐 Architecture
-
-The application follows a **client-server architecture**:
-
-- The **frontend** (React) communicates with the backend through a REST API
-- The **backend** (Python/Flask) handles business logic, authentication, and database operations
-- **JWT tokens** are used to protect private routes and differentiate user roles
+|-------|------------|
+| 🖥️ Frontend | React, Vite, CSS |
+| ⚙️ Backend | Flask, Python, SQLAlchemy |
+| 🗄️ Database | PostgreSQL |
+| ☁️ Deployment | Render |
 
 ---
 
@@ -47,35 +37,31 @@ The application follows a **client-server architecture**:
 
 ### Prerequisites
 - Node.js and npm installed
-- Python 3.8+ installed
+- Python 3.8+ and pipenv installed
 - PostgreSQL installed and running
 
-### Backend
+### ⚙️ Backend
 
 ```bash
 # Clone the repository
 git clone https://github.com/jenifferalejandracollazos-droid/2-gym.git
 cd 2-gym
 
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
 # Install dependencies
-pip install -r requirements.txt
+pipenv install
 
 # Set up environment variables
 cp .env.example .env
-# Edit .env with your database credentials
+# Edit .env with your database URL and secret keys
 
 # Run migrations
-flask db upgrade
+pipenv run flask db upgrade
 
 # Start the backend server
-flask run
+pipenv run flask run
 ```
 
-### Frontend
+### 🖥️ Frontend
 
 ```bash
 # In a new terminal, navigate to the frontend folder
@@ -85,10 +71,20 @@ cd src/front
 npm install
 
 # Start the frontend
-npm start
+npm run start
 ```
 
 The app will be running at `http://localhost:3000`
+
+---
+
+## 📐 Architecture
+
+The application follows a **client-server architecture**:
+
+- The **frontend** (React + Vite) communicates with the backend through a REST API
+- The **backend** (Python/Flask) handles business logic, authentication, and database operations
+- **JWT tokens** protect private routes and differentiate user roles (admin / client)
 
 ---
 
@@ -101,28 +97,9 @@ This project was built as a final project at [4Geeks Academy](https://4geeksacad
 
 ---
 
-## 🧠 What I Learned
-
-- Designing and consuming a RESTful API from scratch
-- Implementing JWT authentication with role-based access control
-- Managing frontend state in React to display dynamic, role-specific dashboards
-- Coordinating a multi-person development workflow using Trello and Git
-
----
-
-## 🔮 Future Improvements
-
-- [ ] Deploy to Render (frontend + backend)
-- [ ] Add payment integration for subscription management
-- [ ] Implement progress tracking with charts for clients
-- [ ] Add email notifications for subscription renewals
-- [ ] Mobile-responsive improvements
-
----
-
 ## 📬 Contact
 
-**Jeniffer Collazos** — Frontend Developer  
-📧 jecollazosdev@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/jeniffer-alejandra-collazos-córdoba1/)  
+**Jeniffer Collazos** — Fullstack Developer
+📧 jecollazosdev@gmail.com
+🔗 [LinkedIn](https://www.linkedin.com/in/jeniffer-alejandra-collazos-córdoba1/)
 💻 [GitHub](https://github.com/jenifferalejandracollazos-droid)
